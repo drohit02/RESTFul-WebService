@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.restapi.webservices.repository.DataRepository;
+import com.restapi.webservices.repository.UserRepository;
 
 @Service
 public class DataService {

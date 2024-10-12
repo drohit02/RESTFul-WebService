@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.restapi.webservices.dto.UserDTO;
 import com.restapi.webservices.models.User;
 import com.restapi.webservices.service.UserService;
 
@@ -21,9 +23,24 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping("/users")
-	public ResponseEntity<List<User>> findAllUsers(){
+	public ResponseEntity<List<User>> findAllUsers() {
 		List<User> users = this.userService.retriveAllUsers();
 		return ResponseEntity.status(HttpStatus.OK).body(users);
+	}
+
+	@PostMapping("/users")
+	public ResponseEntity<User> persistUser(@RequestBody UserDTO user) {
+		/*
+		 * 1. Created method to saved user 2.first mapped the method with respective
+		 * HTTP method i.e.POST 3.Accept the data from request body and saved in UserDTO
+		 * object 4.Send this data or object to the dao to saved in database 5.If the
+		 * data saved properly in database it returns the saved object 6.Saved object
+		 * will be type of the User and the response is given back to User.
+		 */
+
+		User savedUser = this.userService.saveUser(user);
+		return ResponseEntity.status(HttpStatus.OK).body(savedUser);
+
 	}
 
 }

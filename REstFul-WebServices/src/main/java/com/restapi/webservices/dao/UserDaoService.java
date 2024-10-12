@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restapi.webservices.dto.UserDTO;
 import com.restapi.webservices.models.User;
 import com.restapi.webservices.repository.UserRepository;
 import com.restapi.webservices.service.UserService;
@@ -25,6 +26,19 @@ public class UserDaoService implements UserService {
 			System.out.println(e.getMessage());
 		}
 		return users;
+	}
+
+	@Override
+	public User saveUser(UserDTO user) {
+		User newUser = new User(user.getUserName(),user.getBirthDate());
+		User savedUser = new User();
+		try {
+		 savedUser = this.userRepository.save(newUser);
+		}
+		catch(Exception e) {
+			System.out.println(e.getLocalizedMessage());
+		}
+		return savedUser;
 	}
 
 }

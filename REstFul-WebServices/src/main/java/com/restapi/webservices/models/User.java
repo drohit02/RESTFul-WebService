@@ -28,6 +28,11 @@ public class User {
 		this.userName = userName;
 		this.birthDate = birthDate;
 	}
+	
+	public User(String userName, LocalDate birthDate) {
+		this.userName = userName;
+		this.birthDate = birthDate;
+	}
 
 	public Integer getUseId() {
 		return this.useId;

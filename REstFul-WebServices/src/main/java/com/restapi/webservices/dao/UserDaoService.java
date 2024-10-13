@@ -49,7 +49,7 @@ public class UserDaoService implements UserService {
 	@Override
 	public User updateUser(Integer userId, UserDTO userDTO) {
 	    // Check if the user exists in the database
-	    User existingUser = userRepository.findById(userId)
+	    User existingUser = this.userRepository.findById(userId)
 	        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
 	    // Update the user's details
@@ -64,10 +64,10 @@ public class UserDaoService implements UserService {
 	public void deleteUser(Integer userId) {
 	    // Check if the user exists in the database
 	    User existingUser = userRepository.findById(userId)
-	        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
+	        .orElseThrow(()-> new ResourceNotFoundException("User not found with id: " + userId));
 	    
 	    // Delete the user
-	    userRepository.delete(existingUser);
+	    this.userRepository.delete(existingUser);
 	}
 
 

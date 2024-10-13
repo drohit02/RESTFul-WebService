@@ -33,8 +33,8 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(users);
 	}
 
-	@GetMapping
-	public ResponseEntity<User> findUserusingId(Integer id){
+	@GetMapping("/users/{id}")
+	public ResponseEntity<User> findUserusingId(@PathVariable Integer id){
 		User userdb = this.userService.retriveUserById(id);
 		return ResponseEntity.status(HttpStatus.OK).body(userdb);
 		
@@ -60,18 +60,18 @@ public class UserController {
 
 	}
 	
-	@PutMapping("/{id}")
+	@PutMapping("/users/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable("id") Integer id, @RequestBody UserDTO userDTO) {
 	    // Call the service layer to update the user
 	    User updatedUser = this.userService.updateUser(id, userDTO);
 	    return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
 	}
 	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
+	@DeleteMapping("/users/{id}")
+	public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
 	    // Call the service layer to delete the user
 	    this.userService.deleteUser(id);
-	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();  // 204 No Content
+	    return ResponseEntity.status(HttpStatus.NO_CONTENT).build(); 
 	}
 
 

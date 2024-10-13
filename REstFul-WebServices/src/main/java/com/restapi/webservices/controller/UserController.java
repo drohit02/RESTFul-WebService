@@ -30,6 +30,12 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(users);
 	}
 
+	@GetMapping
+	public ResponseEntity<User> findUserusingId(Integer id){
+		User userdb = this.userService.retriveUserById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(userdb);
+		
+	}
 	@PostMapping("/users")
 	public ResponseEntity<User> persistUser(@RequestBody UserDTO user) {
 		/*

@@ -1,10 +1,12 @@
 package com.restapi.webservices.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.restapi.webservices.customexception.UserNotFoundException;
 import com.restapi.webservices.dto.UserDTO;
 import com.restapi.webservices.models.User;
 import com.restapi.webservices.repository.UserRepository;
@@ -39,6 +41,14 @@ public class UserDaoService implements UserService {
 			System.out.println(e.getLocalizedMessage());
 		}
 		return savedUser;
+	}
+
+	@Override
+	public User retriveUserById(Integer id) {
+		Optional<User> savedUser = this.userRepository.findById(id);
+		if(!savedUser.isPresent())
+			throw new UserNotFoundException("User not found with id : "+id);
+		return savedUser.get();
 	}
 
 }
